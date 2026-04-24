@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPU Scheduling Simulator</title>
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- PDF Export Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>CPU Scheduling Simulator</h1>
+            <p>FCFS | SJF | SRTF | Priority | Round Robin | Multilevel</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Input Section -->
+            <div class="card input-section">
+                <h2>1. Add Processes</h2>
+                <form id="processForm">
+                    <div class="form-row">
+                        <input type="text" id="pId" placeholder="Process ID (e.g., P1)" required>
+                        <input type="number" id="arrival" placeholder="Arrival Time" required min="0">
+                        <input type="number" id="burst" placeholder="Burst Time" required min="1">
+                        <input type="number" id="priority" placeholder="Priority (1=High)" required min="1">
+                    </div>
+                    <button type="button" onclick="addProcess()">Add Process</button>
+                </form>
+
+                <div class="process-table-container">
+                    <table id="processTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Arrival</th>
+                                <th>Burst</th>
+                                <th>Priority</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Processes added here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Controls Section -->
+            <div class="card controls-section">
+                <h2>2. Select Algorithm</h2>
+                <select id="algoSelect">
+                    <option value="FCFS">First Come First Serve (FCFS)</option>
+                    <option value="SJF">Shortest Job First (SJF)</option>
+                    <option value="SRTF">Shortest Remaining Time First (SRTF)</option>
+                    <option value="Priority">Priority Scheduling</option>
+                    <option value="RR">Round Robin (Quantum = 2)</option>
+                    <option value="MLQ">Multilevel Queue (System/User)</option>
+                </select>
+                <button class="run-btn" onclick="runSimulation()">Run Simulation</button>
+                <button class="export-btn" onclick="exportPDF()">Export Report (PDF)</button>
+            </div>
+        </div>
+
+        <!-- Visualization Section -->
+        <div class="card visualization-section" id="resultsArea">
+            <h2>3. Gantt Chart Visualization</h2>
+            <canvas id="ganttChart"></canvas>
+        </div>
+
+        <!-- Metrics Section -->
+        <div class="card metrics-section">
+            <h2>Performance Metrics</h2>
+            <div class="metrics-grid">
+                <div class="metric-box">
+                    <h3>Avg Waiting Time</h3>
+                    <span id="avgWait">0</span> ms
+                </div>
+                <div class="metric-box">
+                    <h3>Avg Turnaround Time</h3>
+                    <span id="avgTAT">0</span> ms
+                </div>
+                <div class="metric-box">
+                    <h3>Avg Response Time</h3>
+                    <span id="avgRT">0</span> ms
+                </div>
+            </div>
+
+            <h3>Detailed Process Table</h3>
+            <table id="resultTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Completion</th>
+                        <th>Turnaround</th>
+                        <th>Waiting</th>
+                        <th>Response</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <!-- Comparison Section -->
+        <div class="card comparison-section">
+            <h2>Comparison with Android CFS</h2>
+            <p><strong>Simulated Algorithms:</strong> These are static. They rely on fixed values (Burst time) known in advance (which is impossible in real OS) or simple queues.</p>
+            <p><strong>Android CFS (Completely Fair Scheduler):</strong> Real-world Android uses CFS. It does not use fixed time slices. Instead, it uses <strong>vruntime</strong> (virtual runtime). It tracks how long a process has run on the CPU. The process with the lowest vruntime gets the CPU next. This ensures fairness over time, preventing starvation, unlike Priority scheduling which can starve low-priority tasks.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

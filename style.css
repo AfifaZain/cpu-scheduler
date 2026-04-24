@@ -1,0 +1,120 @@
+:root {
+    --primary: #2563eb;
+    --secondary: #1e40af;
+    --bg: #f3f4f6;
+    --card-bg: #ffffff;
+    --text: #1f2937;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 { color: var(--primary); margin-bottom: 5px; }
+
+.card {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .main-content { grid-template-columns: 1fr; }
+}
+
+/* Forms & Inputs */
+.form-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+input, select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    flex: 1;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+button[type="button"] { background-color: var(--primary); color: white; }
+button[type="button"]:hover { background-color: var(--secondary); }
+
+.run-btn { background-color: #10b981; color: white; width: 100%; margin-bottom: 10px;}
+.export-btn { background-color: #ef4444; color: white; width: 100%; }
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+th { background-color: #f8fafc; }
+
+.delete-btn {
+    background-color: #ef4444;
+    color: white;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+}
+
+/* Metrics */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.metric-box {
+    background: #e0e7ff;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.metric-box h3 { margin: 0; font-size: 0.9rem; color: #555; }
+.metric-box span { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+
+/* Comparison Section */
+.comparison-section {
+    border-left: 5px solid #f59e0b;
+}
